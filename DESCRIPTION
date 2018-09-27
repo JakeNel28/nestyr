@@ -1,0 +1,30 @@
+Package: nestyr
+Type: Package
+Title: The nestyr package...a tidyr extension
+Version: 0.0.0.9000
+Authors@R: c(
+    person("Jacob", "Nelson", , "jakenel28@gmail.com", c("aut", "cre")),
+    person("Hadley", "Wickham", , "hadley@rstudio.com", "ctb"),
+    person("Lionel", "Henry", , "lionel@rstudio.com", "ctb"),
+    person("RStudio", role = "ctb")
+    )
+Maintainer: Jacob Nelson <jakenel28@gmail.com>
+Description: The nestyr package is intended to serve as a small extension to the tidyr package. It provides nesting functionality similar to tidyr's, but which does not rely on dplyr's grouping functions to help specify a nest. This allows for greater flexibility and more intuitive syntatic expression. Perhaps most noteably, by not relying on dplyr's grouping functions, nestyr allows for the creation of multiple nests in the same data frame.  
+License: MIT + file LICENSE
+Depends: R (>= 3.1)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.0
+Imports: 
+  assertthat, 
+  digest, 
+  dplyr, 
+  purrr, 
+  rlang, 
+  tibble, 
+  tidyselect
+Suggests: 
+  testthat, 
+  tidyr, 
+  tidyverse, 
+  gapminder
