@@ -2,18 +2,18 @@
 nestyr
 ======
 
-"Nesting" a data frame describes the process of combining values to create a single list-column variable of data frames *within* a data frame. The `tidyr` package makes this process easy with the `nest()` function. See an example here: "<http://r4ds.had.co.nz/many-models.html>".
+"Nesting" a data frame describes the process of combining values to create a single list-column variable of data frames *within* a data frame. The `tidyr` package makes this process easy with the `nest()` function. See an example here: <http://r4ds.had.co.nz/many-models.html>.
 
-Nesting in `tidyr` relies on grouping functions from the `dplyr` package to index the rows before nesting. However, as of September of 2018, `dplyr` is still unable to group by list columns (see <https://github.com/tidyverse/tidyr/issues/249>). In other words, you cannot nest variables with a list column not included in your nest. This also means you cannot create multiple nests, as they are list columns.
+Nesting in `tidyr` relies on grouping functions from the `dplyr` package to index the rows before nesting. However, as of September of 2018, `dplyr` is still unable to group by list columns (see <https://github.com/tidyverse/tidyr/issues/249>). In other words, you cannot nest variables with a list column included in your nest. This also means you cannot create multiple nests, because the first nest would create a list column.
 
-The `nestyr` package gets around this problem with the `nestyr::nest2()` function. Instead of grouping by list columns directly, it finds an MD5 hash for all objects within any list columns before finding the group indices.
+The `nestyr` package gets around this problem with the `nestyr::nest2()` function. Instead of grouping by list columns directly, it finds an MD5 hash for all elements of any list columns, and uses the hash to find the group indices.
 
-The `nestyr::nest_cols()` function gets around the need to include a row id to nesting columns together while preserving rows. In other words, you can nest horizontally without thinking about row grouping. Like `nest2`, `nest_cols` also works with pre-existing list columns.
+Additionally, the `nestyr::nest_cols()` function gets around the need to include a row id to nest columns together while preserving rows. In other words, you can nest horizontally without thinking about row grouping. Like `nest2`, `nest_cols` also works with pre-existing list columns.
 
 Example
 -------
 
-Suppose we take the example provided by the "R for Data Science" book by Garret Germund and Hadley Wickham see (<https://github.com/tidyverse/tidyr/issues/249>). In this instance, however, let's say we wanted to nest together the columns `country` and `continent` together, and then nest together the remaining columns by unique country-continent.
+Suppose we take the example provided by the "R for Data Science" book by Garret Germund and Hadley Wickham (see <https://github.com/tidyverse/tidyr/issues/249>). In this instance, however, let's say we wanted to nest together the columns `country` and `continent` together, and then nest together the remaining columns by unique country-continent.
 
 ``` r
 library(gapminder)
@@ -38,8 +38,10 @@ gapminder %>%
 #> # ... with 132 more rows
 ```
 
-Install
--------
+Installation
+------------
+
+Use `devtools` to install from github. This package is not yet available on CRAN.
 
 ``` r
 library(devtools)
@@ -49,4 +51,4 @@ install_github("JakeNel28/nestyr")
 Acknowledgements
 ----------------
 
-The package relies on much of the source code and some documentation used in `tidyr::nest()`, which was developed by Hadley Wickham "<hadley@rstudio.com>", Lionel Henry "<lionel@rstudio.com>", and RStudio <https://www.rstudio.com/>.
+The package relies on much of the source code and some documentation used in `tidyr::nest()`, which was developed by Hadley Wickham "<hadley@rstudio.com>", Lionel Henry "<lionel@rstudio.com>", and RStudio <https://www.rstudio.com/>. I am very grateful to them for developing `tidyr`!
